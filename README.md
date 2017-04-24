@@ -40,7 +40,7 @@ Configuration of DocBleachShell is controlled via DocBleachShell.exe.config:
 ```xml
   <appSettings>
      <add key="OnlyBleachInternetFiles" value="true"/>
-
+     ...
   </appSettings>
 ```
 
@@ -52,7 +52,7 @@ DocBleachShell includes an integration of [Joe Sandbox Cloud](https://www.joesec
 
 ```xml
   <appSettings>
-
+     ...
      <add key="JoeSandboxCloudAPIKey" value="addyourapikeyhere"/>
   </appSettings>
 ```
