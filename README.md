@@ -4,7 +4,7 @@ DocBleachShell is the integration of the great [DocBleach](https://github.com/do
 
 **By using DocBleachShell documents are automatically disarmed before they are opened by Microsoft Word, Excel or Powershell.** As a result end users which installed DocBleachShell are protected from exploits and malicious macros. DocBleachShell also comes with a [Joe Sandbox Cloud](https://www.joesecurity.org/joe-sandbox-cloud) integration. **Successfully bleached documents are automatically analyzed by Joe Sandbox Cloud**. In Joe Sandbox Cloud users can enable alerts, e.g. automated emails on detection of malicious files. With that CERTs, CIRTS or SOCs are automatically notified if their users where attacked by malicious documents. 
 
-![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/h/master/img/shell.png)h
+![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/docbleachshell/master/img/shell.png)
 
 DocBleachShell modifies the Microsoft Windows Shell Handler via the HKEY_CLASSES_ROOT\Type\shell\open\command registry key. 
 
@@ -21,11 +21,11 @@ Code is developed in C# / .Net 4 and licensed under MIT.
 
 To install DocBleachShell, call **DocBleachShell.exe -install** from a Administrator shell:
 
-![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/docbleachsell/master/img/install.png)
+![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/docbleachshell/master/img/install.png)
 
 DocBleachShell will search and replace all shell handlers for Word, Excel and Powerpoint. For each registry modification a backup is made to the backup folder. After installation do not move DocBleachShell to any other path. To uninstall DocBleachShell call **DocBleachShell.exe -uninstall**:
 
-![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/docbleachsell/master/img/uninstall.png)
+![DocBleacShell Overview](https://raw.githubusercontent.com/joesecurity/docbleachshell/master/img/uninstall.png)
 
 Once installed opening a Office file will start DocBleachShell. DocBleachShell will then call DocBleach. DocBleach will disarm the document. Finally DocBleachShell will start Office to open the disarmed file.
 
