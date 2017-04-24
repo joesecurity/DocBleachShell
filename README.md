@@ -61,7 +61,7 @@ After that, DocBleachShell will upload any document which DocBleach has disarmed
 # Links
 
 * [DocBleach](https://github.com/docbleach/DocBleach) 
-* [Joe Sandbox Cloud](https://www.joesecurity.org/joe-sandbox-cloud).
+* [Joe Sandbox Cloud](https://www.joesecurity.org/joe-sandbox-cloud)
 
 # Author
 
