@@ -69,7 +69,14 @@ namespace DocBleachShell
 			// Cleanup & recovery
 			if(File.Exists(FilePath))
 			{
-				File.Delete(TmpDoc);
+				try
+				{
+					File.Delete(TmpDoc);
+				} catch(Exception e)
+				{
+					Logger.Error("Unable to delete original file: " + TmpDoc, e);
+				}
+				
 				Logger.Debug("Successfully bleached: " + FilePath);
 			} else
 			{
