@@ -1,0 +1,7 @@
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\obj\Debug\DocBleachShell.csprojResolveAssemblyReference.cache
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\bin\Debug\DocBleachShell.exe.config
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\bin\Debug\DocBleachShell.exe
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\bin\Debug\DocBleachShell.pdb
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\bin\Debug\Trinet.Core.IO.Ntfs.dll
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\obj\Debug\DocBleachShell.exe
+C:\Users\vinz\Source\Repos\DocBleachShell\DocBleachShell\DocBleachShell\obj\Debug\DocBleachShell.pdb
