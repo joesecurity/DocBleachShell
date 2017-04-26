@@ -58,16 +58,25 @@ namespace DocBleachShell
 			String Output = File.ReadAllText(TargetDirectory + "\\tmp.log");
 			
 			Logger.Debug("DocBleach output: " + Output);
-			
+
 			// If the document was bleach "contains potential malicious elements" analyze the file with Joe Sandbox Cloud.
-			if(!Output.Contains("file was already safe"))
+			// If no Cloud API key has been configured, nothing is send to the cloud
+			String APIKey = ConfigurationManager.AppSettings["JoeSandboxCloudAPIKey"];
+			if (APIKey.Length != 0)
 			{
-				String APIKey = ConfigurationManager.AppSettings["JoeSandboxCloudAPIKey"];
-				new JoeSandboxClient().Analyze(TmpDoc, APIKey);
+				if (!Output.Contains("file was already safe"))
+				{
+					new JoeSandboxClient().Analyze(TmpDoc, APIKey);
+					Logger.Debug("Doc sent to the cloud");
+				}
 			}
-			
+			else
+			{
+				Logger.Debug("Doc not sent to cloud : no API key configured");
+			}
+
 			// Cleanup & recovery
-			if(File.Exists(FilePath))
+			if (File.Exists(FilePath))
 			{
 				try
 				{
