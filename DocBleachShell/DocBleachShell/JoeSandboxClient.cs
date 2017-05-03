@@ -25,10 +25,17 @@ namespace DocBleachShell
 		/// <summary>
 		/// Analyze the file on Joe Sandbox Cloud. 
 		/// </summary>
-		/// <param name="FilePath"></param>
-		/// <param name="APIKey"></param>
-		public void Analyze(String FilePath, String APIKey)
+		/// <summary>
+		/// Analyze the file on Joe Sandbox Cloud. 
+		/// </summary>
+		/// <param name="obj"></param>
+		public void Analyze(Object obj)
 		{
+			String[] Params = (String[])obj;
+			
+			String FilePath = Params[0];
+			String APIKey  = Params[1];
+			
 			Logger.Debug("Analyze: " + FilePath + " with Joe Sandbox Cloud");
 			
 			try {
