@@ -66,10 +66,7 @@ namespace DocBleachShell
 			{
 				if (!Output.Contains("file was already safe"))
 				{
-					String[] Params = new string[]{TmpDoc, APIKey};
-				
-					Thread t = new Thread (new ParameterizedThreadStart(new JoeSandboxClient().Analyze));
-					t.Start (Params);
+					new JoeSandboxClient().Analyze(TmpDoc, APIKey);
 					
 					Logger.Debug("Doc sent to the cloud");
 				}
