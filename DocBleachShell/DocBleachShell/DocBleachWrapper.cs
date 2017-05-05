@@ -7,6 +7,7 @@
 using System;
 using System.Configuration;
 using System.IO;
+using System.Threading;
 using log4net;
 
 namespace DocBleachShell
@@ -28,15 +29,33 @@ namespace DocBleachShell
 			Logger.Debug("Try to bleach: " + FilePath);
 			
 			String CurrentDir = Directory.GetCurrentDirectory();
+			
+			String AppDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DocBleachShell";
+
+			// Create backup dir.
+			try
+			{
+				Directory.CreateDirectory(AppDir + "\\backup\\docs");
+			} catch(Exception)
+			{
+			}
 					
 			Directory.SetCurrentDirectory(Directory.GetParent(FilePath).FullName);
 		
-			try
+	
+			String MakeBackup =  ConfigurationManager.AppSettings["MakeBackup"];
+					
+			if(bool.Parse(MakeBackup))
 			{
-				File.Copy(FilePath, TargetDirectory + "\\backup\\docs\\" + Path.GetFileName(FilePath), true);
-			} catch(Exception e)
-			{
-				Logger.Error("Unable to make a backup of the document", e);
+				
+				try
+				{
+					File.Copy(FilePath, AppDir + "\\backup\\docs\\" + Path.GetFileName(FilePath), true);
+				} catch(Exception e)
+				{
+					Logger.Error("Unable to make a backup of the document", e);
+				}
+				
 			}
 			
 			// Original doc -> bleach. .... do
@@ -53,40 +72,36 @@ namespace DocBleachShell
 			
 			// Call docbleach which will generate doc
 			Helper.LaunchCmd("java -jar \"" + TargetDirectory + "\\docbleach.jar\" -in \"" + TmpDoc + 
-			          "\" -out \"" + Path.GetFileName(FilePath) + "\" > \"" + TargetDirectory + "\\tmp.log\" 2>&1");
+			          "\" -out \"" + Path.GetFileName(FilePath) + "\" > \"" + AppDir + "\\tmp.log\" 2>&1");
 			
-			String Output = File.ReadAllText(TargetDirectory + "\\tmp.log");
+			String Output = File.ReadAllText(AppDir + "\\tmp.log");
 			
 			Logger.Debug("DocBleach output: " + Output);
-
+			
 			// If the document was bleach "contains potential malicious elements" analyze the file with Joe Sandbox Cloud.
-			// If no Cloud API key has been configured, nothing is send to the cloud
-			String APIKey = ConfigurationManager.AppSettings["JoeSandboxCloudAPIKey"];
-			if (APIKey.Length != 0)
+			if(!Output.Contains("file was already safe"))
 			{
-				if (!Output.Contains("file was already safe"))
+				String APIKey = ConfigurationManager.AppSettings["JoeSandboxCloudAPIKey"];
+				
+				if(APIKey.Length != 0)
 				{
 					new JoeSandboxClient().Analyze(TmpDoc, APIKey);
-					
-					Logger.Debug("Doc sent to the cloud");
 				}
 			}
 			else
 			{
 				Logger.Debug("Doc not sent to cloud : no API key configured");
 			}
-
 			// Cleanup & recovery
-			if (File.Exists(FilePath))
+			if(File.Exists(FilePath))
 			{
 				try
 				{
 					File.Delete(TmpDoc);
 				} catch(Exception e)
 				{
-					Logger.Error("Unable to delete original file: " + TmpDoc, e);
+					Logger.Error("Unable to delete original file " + TmpDoc, e);
 				}
-				
 				Logger.Debug("Successfully bleached: " + FilePath);
 			} else
 			{

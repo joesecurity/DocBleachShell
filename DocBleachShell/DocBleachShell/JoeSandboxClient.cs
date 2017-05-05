@@ -22,14 +22,13 @@ namespace DocBleachShell
 		
 		private const String APIUrl = "https://jbxcloud.joesecurity.org/api/analysis";
 		
-				/// <summary>
+		/// <summary>
 		/// Analyze the file on Joe Sandbox Cloud. 
 		/// </summary>
 		/// <param name="FilePath"></param>
 		/// <param name="APIKey"></param>
 		public void Analyze(String FilePath, String APIKey)
 		{
-			
 			Logger.Debug("Analyze: " + FilePath + " with Joe Sandbox Cloud");
 			
 			try {
