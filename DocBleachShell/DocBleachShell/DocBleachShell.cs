@@ -164,9 +164,9 @@ namespace DocBleachShell
 		        			Helper.LaunchCmd("reg delete HKCR\\" + V + "\\Shell\\Open\\ddeexec /f");
 		        			
 		        			
-		        			// C:\PROGRA~2\MICROS~1\Office14\POWERPNT.EXE "%1"
+		        			// @="\"C:\\Program Files\\Microsoft Office 15\\Root\\Office15\\WINWORD.EXE\" /n \"%1\" /o \"%u\""
 		        			
-		        			int i = Cmdline.IndexOf(".exe");
+		        			int i = Cmdline.ToLower().IndexOf(".exe");
 		        			
 		        			String App = "";
 		        			String NewPath = "";
