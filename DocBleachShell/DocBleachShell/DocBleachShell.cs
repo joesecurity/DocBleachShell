@@ -320,6 +320,8 @@ namespace DocBleachShell
 					Logger.Debug("Do not bleach: " + Args[l] + " not from internet");
 				}
 				
+				Logger.Debug("Start: " + OfficePath + " " + AllArgs);
+				
 				// Call Office with bleached file.
 				try
 				{
